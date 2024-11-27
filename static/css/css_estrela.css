@@ -1,0 +1,34 @@
+.rating {
+  font-size: 36px;
+}
+
+.star {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 36px;
+}
+
+.estrelas {
+  font-size: 34px;
+}
+
+.estrela {
+  color: #FFD700;
+}
+
+.estrela.vazia {
+  color: #ccc;
+}
+
+.like-button {
+  border: 0cm;
+}
+
+.star.active {
+  color: #FFD700;
+  /* Cor amarela para a estrela ativa */
+  background-color: transparent;
+  /* Remova qualquer cor de fundo */
+  font-size: 36px;
+  /* Mantenha o tamanho da fonte, se necessário */
+}

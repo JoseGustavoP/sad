@@ -1,0 +1,97 @@
+.carousel {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  margin: 0px 20px;
+}
+
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.item {
+  width: 20vw;
+  min-width: 320px;
+  height: 200px;
+  padding: 10px;
+  text-align: center;
+  transition: all ease-in-out .2s;
+}
+
+.item:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.item img {
+
+  margin-bottom: -100px;
+}
+
+#button1 {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  /* transform: translateY(-50%); */
+  border: none;
+  /* background-color: rgba(0,0,0,0.5); */
+  /* color: var(--bs-dark-gray); */
+  /* padding: 10px 15px; */
+  cursor: pointer;
+  /* border-radius: 50px; */
+  font-size: 30px;
+}
+
+.prev {
+  left: 0;
+  opacity: 0.3;
+  transition: all .3s;
+}
+
+.next {
+  right: 0;
+  opacity: 0.3;
+  transition: all .3s;
+}
+
+.prev:hover,
+.next:hover {
+  opacity: 1;
+}
+
+.item h3,
+.item p {
+  text-align: left;
+  margin: 0px;
+  padding: 0px 20px;
+}
+
+p {
+  margin: 0px;
+}
+
+.item a {
+  text-decoration: none;
+  height: fit-content;
+  color: var(--bs-gray-dark)
+}
+
+.item .heading {
+  position: absolute;
+  bottom: 20px;
+}
+
+
+.container {
+  overflow: hidden;
+}
+
+.outlined-text {
+  color: black;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; 
+}

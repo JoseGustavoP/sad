@@ -1,0 +1,42 @@
+/* CSS */
+/* Estilizando o título para alinhar à esquerda */
+.titulo-esquerda {
+    float: left;
+}
+
+/* Estilo para o botão "Criar Curso" */
+.btn.btn-5-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    color: #fff;
+    background-color: #198754; /* Alterando a cor para #198754 */
+    float: right; /* Posicionando o botão totalmente à direita */
+}
+
+/* Limpar floats para evitar que outros elementos flutuem */
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Estilo para dispositivos menores que 600px de largura */
+@media (max-width: 600px) {
+    .btn.btn-5-custom {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin-right: 0;
+    }
+
+    .titulo-esquerda {
+        float: none; /* Removendo o float para manter o título abaixo do botão em dispositivos menores */
+        margin-bottom: 10px; /* Adicionando espaçamento entre o título e o botão */
+    }
+}

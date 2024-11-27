@@ -1,0 +1,39 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Cadastro</title>
+{% endblock %}
+{% block estilos %}
+<link href="{% static 'css/csscadastrar.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block corpo %}
+<div class="form-group">
+	<h2>Cadastre-se</h2>
+	<form id='cadastro-form' action="" method="POST">
+		{% csrf_token %}
+		{{ form.username.label_tag }}
+		{{ form.username }}
+		{{ form.matricula.label_tag }}
+		{{ form.matricula }}
+		{{ form.matricula.help_text }}
+		{{ form.password1.label_tag }}
+		{{ form.password1 }}
+		{{ form.password1.help_text }}
+		{{ form.password2.label_tag }}
+		{{ form.password2 }}
+		{{ form.password2.help_text }}
+		{% for field in form.visible_fields %}
+			{% if field.errors %}
+				<div class="alert alert-danger">
+					{{ field.errors.0 }}
+				</div>
+			{% endif %}
+		{% endfor %}
+		<p>
+			<button type="submit" class="button">Cadastrar</button>
+		</p>
+	</form>
+</div>
+{% endblock %}

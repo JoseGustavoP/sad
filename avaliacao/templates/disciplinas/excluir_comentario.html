@@ -1,0 +1,16 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block corpo %}
+    <div class="container">
+        <h1>Excluir Comentário</h1>
+        <p>Você está prestes a excluir o seguinte comentário: "{{ object.texto }}".</p>
+        <p>Tem certeza que deseja excluir este comentário?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Excluir">
+        </form>
+        <br>
+    </div>
+{% endblock  %}

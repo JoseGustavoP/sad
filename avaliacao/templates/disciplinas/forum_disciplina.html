@@ -1,0 +1,224 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block estilos %}
+<link href="{% static 'css/css_estrela.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/paginacao.css' %}">
+<link rel="stylesheet" href="{% static 'css/botoes.css' %}">
+<link rel="stylesheet" href="{% static 'css/imagem_forum.css' %}">
+
+{% endblock %}
+{% block corpo %}
+<div class="container">
+    <h1>Fórum da disciplina de {{ disciplina.nome }}</h1>
+    <!-- Detalhes da Disciplina -->
+    <div class="detalhes">
+        <div class="info-disciplina">
+            <p><strong>Sigla -</strong> {{ disciplina.sigla }}</p>
+            <p><strong>Carga Horaria -</strong> {{ disciplina.ch }} horas</p>
+            <p><strong>Descrição:</strong> {{ disciplina.descricao }}</p>
+        </div>
+    </div>
+    <div style="clear: both;"></div> <!-- Para limpar os floats -->
+    <!-- Exibindo a média de avaliação da disciplina -->
+    <div class="avaliacao">
+        <div class="estrelas">
+            <h3>Média de Avaliação: {{ media_avaliacao|default:"N/A" }}</h3>
+            {% if media_avaliacao != "N/A" %}
+            {% for i in "12345" %}
+            {% if forloop.counter <= media_avaliacao %} <span class="estrela preenchida">★</span>
+                {% else %}
+                <span class="estrela vazia">☆</span>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+
+
+        </div>
+        <!-- Comentários Paginados -->
+        <!-- Hover #3 -->
+        <a href="{% url 'forum_disciplina' disciplina.id %}" class="botao-filtro botao-recentes {% if not request.GET.by_like %}ativo{% endif %}">Recentes</a>
+        <a href="{% url 'forum_disciplina' disciplina.id %}?by_like=True" class="botao-filtro botao-curtidos {% if request.GET.by_like %}ativo{% endif %}">Mais Curtidos</a>
+        
+        
+        <div id="comentarios">
+            {% for comentario in comentarios %}
+            <div class="comment card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="user-info">
+                                <div class="author-info">
+                                    <h3>{{ comentario.autor.username }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            {% if request.user == comentario.autor or request.user.is_staff %}
+
+                            <ul class="custom-menu">
+                                {% if request.user.is_authenticated and comentario.autor == request.user %}
+                                <button class="btn btn-sm btn-secondary btn-editar"
+                                    onclick="editar_comentario_js({{ comentario.id}})">
+                                    <img src="{% static 'img/botao-editar.png' %}" alt="">
+                                </button>
+                                {%endif%}
+                                {% if request.user.is_authenticated and comentario.autor == request.user %}
+                                <button class="btn btn-sm btn-secondary btn-excluir"
+                                    data-comentario-id="{{ comentario.id }}">
+                                    <img src="{% static 'img/lixeira-de-reciclagem.png' %}" alt="">
+                                </button>
+                                {%elif request.user.is_staff %}
+                                <button class="btn btn-sm btn-secondary btn-excluir"
+                                    data-comentario-id="{{ comentario.id }}">
+                                    <img src="{% static 'img/lixeira-de-reciclagem.png' %}" alt="">
+                                </button>
+                                {%endif%}
+                            </ul>
+
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="star-rating">
+                        {% for i in "12345" %}
+                        <span
+                            class="estrela {% if forloop.counter <= comentario.avaliacao %}preenchida{% else %}vazia{% endif %}">★</span>
+                        {% endfor %}
+                    </div>
+
+                    <p>{{ comentario.texto }}</p>
+                    <p>
+                        <small>Publicado em {{ comentario.data_publicacao }}</small>
+                    </p>
+                    <p>
+                        <span id="likes-count-{{ comentario.id }}">{{ comentario.curtida.count }}</span> curtida(s)
+                        {% if request.user.is_authenticated %}
+                        {% if comentario.user_has_liked %}
+                        <button class="like-button" data-comment-id="{{ comentario.id }}" data-liked="true"><img src="{% static 'img/descurtir.png' %}" alt="" class="icon-curtir"></button>
+
+                        {% else %}
+                        <button class="like-button" data-comment-id="{{ comentario.id }}" data-liked="false"><img src="{% static 'img/curtir.png' %}" alt="" class="icon-curtir"></button>
+
+                        {% endif %}
+                        {% endif %}
+                    </p>
+                    </p>
+                </div>
+            </div>
+            {% empty %}
+            <p>Não há comentários neste fórum.</p>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criarComentario">
+                Novo comentário
+            </button>
+            {% else %}
+            <h3>Para publicar um comentário, é necessário fazer login.</h3>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- Paginação dos Comentários -->
+    <div class="pagination">
+        <a href="#" class="prev">&laquo;&laquo; Início</a>
+        <a href="#" class="prev">&laquo; Anterior</a>
+
+        {% for i in comentarios.paginator.page_range %}
+        <a href="?page={{ i }}" class="page {% if comentarios.number == i %}active{% endif %}">{{ i }}</a>
+        {% endfor %}
+
+        <a href="#" class="next">Próxima &raquo;</a>
+        <a href="#" class="next">Última &raquo;&raquo;</a>
+
+
+    </div>
+    <!-- Fim da Paginação dos Comentários -->
+
+    <!-- Modal de confirmação de exclusão -->
+    <div class="modal fade" id="confirmacaoExclusao" tabindex="-1" role="dialog"
+        aria-labelledby="confirmacaoExclusaoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmacaoExclusaoLabel">Confirmação de Exclusão</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir este comentário?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edicaoComentario" tabindex="-1" role="dialog" aria-labelledby="edicaoComentarioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edicaoComentarioLabel">Editar Comentário</h5>
+
+                </div>
+                <div class="modal-body">
+                    <!-- Seu formulário de edição aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <div class="modal fade" id="criarComentario" tabindex="-1" role="dialog" aria-labelledby="criarComentarioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edicaoComentarioLabel">Novo Comentário</h5>
+                </div>
+                <div class="modal-body">
+
+
+                    <!-- Formulário para Novo Comentário -->
+                    <form method="post" action="{% url 'forum_disciplina' disciplina_id=disciplina.id %}">
+                        <div class="container">
+                            <h3>Avalie esta disciplina de 1 a 5 estrelas </h3>
+                            <div class="rating">
+                                <span class="star" data-rating="1">&#9733;</span>
+                                <span class="star" data-rating="2">&#9733;</span>
+                                <span class="star" data-rating="3">&#9733;</span>
+                                <span class="star" data-rating="4">&#9733;</span>
+                                <span class="star" data-rating="5">&#9733;</span>
+                            </div>
+                            <h3>Adicione um Comentário</h3>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+
+                                <input type="submit" class="btn btn-primary" value="Publicar">
+                            </form>
+
+                            <br>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% endblock %}
+    {% block scripts %}
+    <script src="{% static 'js/paginacao.js' %}"></script>
+    <script src="{% static 'js/curtidas.js' %}"></script>
+    <script src="{% static 'js/avaliestrela.js' %}"></script>
+    <script src="{% static 'js/comentarioedicao.js' %}"></script>
+    {% endblock %}

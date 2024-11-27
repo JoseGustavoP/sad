@@ -1,0 +1,40 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% block estilos %}
+<link href="{% static 'css/botao_adicionar_curso.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block corpo %}
+
+<div class="container">
+    <a href="{% url 'cadastrar-curso' %}" class="btn btn-5-custom">Criar Curso</a>
+    <h2 class="titulo-esquerda">Lista de Cursos Cadastrados</h2>
+</div>
+
+
+<hr>
+<div class="table-responsive">
+    
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Opcões</th>
+        </tr>
+        {% for Curso in object_list %}
+        <tr>
+            <td>{{ Curso.pk }}</td>
+            <td>{{ Curso.nome }}</td>
+            <td>
+                <a href="{% url 'editar-curso' Curso.pk %}" class="btn btn-warning btn-sm" title="Editar"><img src="{% static 'img/botao-editar.png' %}" alt=""></a>
+                <a href="{% url 'excluir-curso' Curso.pk %}" class="btn btn-danger btn-sm" title="Excluir"><img src="{% static 'img/lixeira-de-reciclagem.png' %}" alt=""></a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td collapse="3">Nenhum Curso regisrado.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

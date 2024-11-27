@@ -1,0 +1,16 @@
+
+.detalhes {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+}
+
+.info-disciplina {
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.imagem-disciplina img {
+    max-width: 100%;
+}

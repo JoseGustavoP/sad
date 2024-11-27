@@ -1,0 +1,41 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% block estilos %}
+<link href="{% static 'css/botao_adicionar_curso.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block corpo %}
+<a href="{% url 'adicionar_disciplina' %}" class="btn btn-5-custom">Criar Disciplina</a>
+<h3>Lista de Cursos Disciplina</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome/th>
+                <th>Carga Horaria</th>
+                <th>Curso</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for disciplina in disciplinas %}
+            <tr>
+                <td>{{ disciplina.pk }}</td>
+                <td>{{ disciplina.nome }}</td>
+                <td>{{ disciplina.ch }}h</td>
+                <td>{{ disciplina.curso }}</td>
+                <td>
+                    <a href="{% url 'editar_disciplina' disciplina.pk  %}" class="btn btn-warning btn-sm"><img
+                            src="{% static 'img/botao-editar.png' %}" alt=""></a>
+                    <a href="{% url 'excluir_disciplina' disciplina.pk  %}" class="btn btn-danger btn-sm"><img
+                            src="{% static 'img/lixeira-de-reciclagem.png' %}" alt=""></a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+</div>
+{% endblock %}

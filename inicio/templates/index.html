@@ -1,0 +1,47 @@
+{% extends 'modelo.html' %}
+{% load static %}
+{% block titulo %}
+<title>Inicio</title>
+{% endblock %}
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/css_carrosel.css' %}" />
+{% endblock %}
+
+{% block corpo %}
+{% for curso in cursos %}
+  <div class="mb-5">
+    <h1>{{curso.nome}}:</h1>
+    <div class="carousel" data-curso-id="{{curso.id}}">
+      <div class="carousel-container">
+        <div class="carousel-slide">
+          {% for disciplina in curso.get_disciplinas %}
+            <div class="item">             
+              <a href="forum/{{disciplina.id}}">
+                {% if disciplina.imagem %}
+                  <img class="img-fluid" src="{{ disciplina.imagem.url }}" alt="{{ disciplina.sigla }}"/>
+                {% else %}
+                  <img class="img-fluid" src="{% static 'img/placeholder.png' %}" alt="Placeholder"/>
+                {% endif %}
+                <div class="heading">
+                  <h3 class="outlined-text">{{disciplina.sigla}}</h1>
+                  <p class="outlined-text">Carga Horaria: {{disciplina.ch}}h</p>
+                </div>
+              </a>
+            </div>
+          {% empty %}
+            <p>Nenhuma disciplina Cadastrada</p>
+          {% endfor %}
+        </div>
+      </div>
+      {% if curso.get_disciplinas|length > 1 %}
+        <button id="button1" class="prev">&lt;</button>
+        <button id="button1" class="next">&gt;</button>
+      {% endif %}
+    </div>  
+  </div>
+{% endfor %}
+
+{% block scripts %}
+<script src="{% static 'js/jscarrosel.js' %}"></script>
+{% endblock %}
+{% endblock %}

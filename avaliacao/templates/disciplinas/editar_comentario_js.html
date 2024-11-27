@@ -1,0 +1,11 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<form method="post" action="{%url 'editar_comentario' object.pk %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <br>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+
+</form>

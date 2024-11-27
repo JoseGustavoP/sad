@@ -1,0 +1,24 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+	<title>Alterar Senha</title>
+{% endblock %}
+{% block estilos %}
+    <link href="{% static 'css/csslogin.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block corpo %}
+    <div class="login-content form-group">
+        <h2>Alterar Senha</h2>
+        <form id="login-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form|crispy }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,248 @@
+/* Adicione este bloco de estilos para os botões de "Editar" e "Publicar" */
+.btn-excluir,
+.btn-excluir:active,
+.btn-excluir:focus,
+.btn-excluir:hover,
+.btn-editar,
+.btn-editar:active,
+.btn-editar:focus,
+.btn-editar:hover {
+    background-color: #fff;
+    /* Cor desejada para o botão "Editar" */
+    color: white;
+    border: none;
+    /* Remover as bordas */
+}
+
+.btn-publicar,
+.btn-publicar:active,
+.btn-publicar:focus,
+.btn-publicar:hover {
+    background-color: #198754;
+    /* Cor desejada para o botão "Publicar" */
+    color: white;
+    border: none;
+    /* Remover as bordas */
+}
+
+/* Adicione este bloco de estilos para os botões de "Excluir" */
+.btn-publicar,
+.btn-publicar:active,
+.btn-publicar:focus,
+.btn-publicar:hover {
+    background-color: #dc3545;
+    /* Cor desejada para o botão "Excluir" */
+    color: white;
+    border: none;
+    /* Remover as bordas */
+}
+
+/* Esconda o menu suspenso inicialmente */
+.custom-dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Estilize o botão do dropdown */
+.custom-dropdown-toggle {
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Estiliza os itens do menu suspenso */
+.custom-dropdown-item {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+}
+
+/* Estiliza os itens do menu suspenso ao passar o mouse sobre eles */
+.custom-dropdown-item:hover {
+    background-color: #198754;
+}
+
+/* Estiliza o contêiner do autor e do botão */
+.author-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Para dispositivos menores, aplique largura 100% ao botão */
+@media (max-width: 767px) {
+    .custom-dropdown {
+        width: 100%;
+        text-align: right;
+    }
+}
+
+/* Estilos personalizados para o modal */
+#confirmacaoExclusao .modal-content {
+    border-radius: 15px;
+    background-color: #fff;
+}
+
+#confirmacaoExclusao .modal-header {
+    border-bottom: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#confirmacaoExclusao .modal-title {
+    color: #333;
+    font-size: 1.5em;
+}
+
+#confirmacaoExclusao .modal-body {
+    color: #555;
+    font-size: 1.2em;
+}
+
+#confirmacaoExclusao .modal-footer {
+    border-top: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#confirmacaoExclusao .btn-secondary,
+#confirmacaoExclusao .btn-danger {
+    border-radius: 5px;
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+#confirmacaoExclusao .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border-color: #6c757d;
+}
+
+#confirmacaoExclusao .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+}
+
+/* Estilos personalizados para o modal de edição */
+#edicaoComentario .modal-content {
+    border-radius: 15px;
+    background-color: #fff;
+}
+
+#edicaoComentario .modal-header {
+    border-bottom: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#edicaoComentario .modal-title {
+    color: #333;
+    font-size: 1.5em;
+}
+
+#edicaoComentario .modal-body {
+    color: #555;
+    font-size: 1.2em;
+}
+
+#edicaoComentario .modal-footer {
+    border-top: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#edicaoComentario .btn-secondary,
+#edicaoComentario .btn-primary {
+    border-radius: 5px;
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+#edicaoComentario .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border-color: #6c757d;
+}
+
+#edicaoComentario .btn-primary {
+    background-color: #198754;
+    color: #fff;
+    border-color: #198754;
+}
+
+/* Estilos para os botões de filtro em português */
+.botao-filtro {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    background-color: #fff;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Estilos para os botões de filtro em português */
+.botao-filtro {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    background-color: #fff;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.botao-filtro:hover {
+    background-color: #f0f0f0;
+}
+
+.botao-recentes {
+    border-color: #198754;
+    color: #198754;
+}
+
+.botao-recentes:hover,
+.botao-recentes.ativo {
+    background-color: #198754;
+    color: #fff;
+}
+
+.botao-curtidos {
+    border-color: #198754;
+    color: #198754;
+}
+
+.botao-curtidos:hover,
+.botao-curtidos.ativo {
+    background-color: #198754;
+    color: #fff;
+}
+
+/* Para remover o fundo dos botões */
+.like-button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Estilize a imagem do ícone */
+.icon-curtir {
+    width: 24px; /* Defina o tamanho adequado para o ícone */
+    height: 24px;
+}

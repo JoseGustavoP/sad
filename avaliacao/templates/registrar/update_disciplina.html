@@ -1,0 +1,50 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    <title>Cadastro</title>
+{% endblock %}
+
+{% block estilos %}
+    <link href="{% static 'css/cadastrar_disciplina.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block corpo %}
+    <div class="container form-container">
+        <div class="login-content form-group" id="disciplina-form">
+            <h4>Cadastrar Disciplina</h4>
+            <form action="" id="login-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-field">
+                    <label for="{{ form.nome.id_for_label }}">Nome:</label>
+                    {{ form.nome }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.descricao.id_for_label }}">Descrição:</label>
+                    {{ form.descricao }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.curso.id_for_label }}">Curso:</label>
+                    {{ form.curso }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.imagem.id_for_label }}">Imagem:</label>
+                    {{ form.imagem }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.ch.id_for_label }}">Carga Horária:</label>
+                    {{ form.ch }}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.sigla.id_for_label }}">Sigla:</label>
+                    {{ form.sigla }}
+                </div>
+
+                <br>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

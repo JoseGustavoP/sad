@@ -1,0 +1,46 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>Autenticação</title>
+{% endblock %}
+{% block estilos %}
+<link href="{% static 'css/csslogin.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block corpo %}
+
+<br>
+{% if request.user.is_authenticated %}
+<div class="login-content form-group">
+	<h3>Ação não permitida</h3>
+	<hr>
+	<p class="lead">
+		<strong>
+			Houve algum problema para processar a ação desejada ou você não tem premissão para isso.
+		</strong>
+		{% else %}
+	<div>			
+		<h2>Conecte-se</h2>
+		<div class="login-content form-group">
+
+			<form id="login-form" action="" method="POST">
+				{% csrf_token %}
+				{{ form.username.label_tag }} {# Altera o rótulo do campo de usuário #}
+				{{ form.username }} {# Renderiza o campo de usuário #}
+				{{ form.password.label_tag }} {# Altera o rótulo do campo de senha #}
+				{{ form.password }} {# Renderiza o campo de senha #}
+				{% if form.errors %}
+				<div class="alert alert-danger">
+					<strong>Erro:</strong> Houve um problema com o seu login. Por favor, verifique suas credenciais.
+				</div>
+				{% endif %}
+				<p>
+					<button type="submit" class="button">Entrar</button>
+				</p>
+
+			</form>
+			{% endif %}
+		</div>
+	</div>
+	{% endblock %}

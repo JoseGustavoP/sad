@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .error-container {
+      text-align: center;
+    }
+
+    .error-code {
+      font-size: 10rem;
+      font-weight: bold;
+      color: #198754;
+    }
+
+    .error-message {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .error-link {
+      margin-top: 20px;
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #5101;
+      color: #198754;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .error-link:hover {
+      color: #ffff;
+      background-color: #198769;
+    }
+
+  </style>
+  <title>Page Not Found</title>
+</head>
+<body>
+  <div class="error-container">
+    <!--alterar os erros abaixo:-->
+    <div class="error-code">400</div>
+    <div class="error-message">Page Not Found</div>
+    <br>
+    <a href="#" class="error-link" onclick="voltar()">home</a>
+  </div>
+
+  <script>
+    function voltar() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

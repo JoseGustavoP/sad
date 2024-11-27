@@ -1,0 +1,29 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+    <title>Excluir Curso</title>
+{% endblock %}
+
+{% block corpo %}
+
+    <div>
+        <h1>Excluir Disciplina</h1>
+    </div>
+    <div class="container">
+        <div  class="login-content">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+            <p>
+                Deseja excluir o Curso: {{ object }}?
+            </p>            	
+                <input type="submit" class="btn btn-danger" value="Excluir">
+        </div>
+    </div>
+{% endblock %}
+    

@@ -1,0 +1,21 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block corpo %}
+<h2>Comentários</h2>
+{% for comentario in comentarios %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <p>{{ comentario.texto }}</p>
+            <p><small>Publicado por {{ comentario.nome_autor }} em {{ comentario.data_publicacao }}</small></p>
+            {% if request.user == comentario.autor %}
+                <a href="{% url 'editar_comentario' comentario.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                <a href="{% url 'excluir_comentario' comentario.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+            {% endif %}
+        </div>
+    </div>
+{% empty %}
+    <p>Não há comentários neste fórum.</p>
+{% endfor %}
+{% endblock  %}

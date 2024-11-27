@@ -1,0 +1,28 @@
+{% extends "modelo.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+	<title>Cadastro</title>
+{% endblock %}
+
+{% block estilos %}
+    <link href="{% static 'css/registrarcurso.css' %}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block corpo %}
+    <div class="container">
+        <div class="login-content">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <h4>Cadastrar Curso</h4>
+
+                {{ form|crispy }}
+
+                <button type="submit" class="btn btn-primary" style="background-color: #198754; color: #fff;">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
